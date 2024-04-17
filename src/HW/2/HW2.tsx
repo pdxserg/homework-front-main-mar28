@@ -10,13 +10,13 @@ export type UserType = {
   id: number;
   name: string;
   age: number;
-  address: any; // пропиши типизацию
+  address: AddressType; // пропиши типизацию
 };
 
 export type UsersObjectType = {
-  myFriends: any; // пропиши типизацию
+  myFriends: Array<UserType>; // пропиши типизацию
 };
-
+export type FilterType = 'Los Angeles'|'all'
 export const HW2 = () => {
 
   // 1️⃣ Раскомментируйте JSX (UserList2.tsx) и вы увидите,
@@ -44,16 +44,40 @@ export const HW2 = () => {
     ]
   }
 
-  let [currentUsers, setCurrentUsers] = useState<UsersObjectType>(users);
 
-  const filterUsers = () => {
-    const filteredUsers = 'НУЖНО ПРОФИЛЬТРОВАТЬ ДРУЗЕЙ. ОСТАВЛЯЕМ ТОЛЬКО ТЕХ, КОТОРЫЕ ЖИВУТ В ГОРОДЕ LOS ANGELES';
-    setCurrentUsers({ myFriends: filteredUsers });
-  };
+let [currentUsers, setCurrentUsers] = useState<UsersObjectType>(users);
 
-  return (
+  let [f,setF]= useState<FilterType>("all")
+
+
+const filterUsers = (value: FilterType ) => {
+    setF(value)
+
+  let filteredUsers = users.myFriends.filter(el => el.address.city === 'Los Angeles')
+  //'НУЖНО ПРОФИЛЬТРОВАТЬ ДРУЗЕЙ. ОСТАВЛЯЕМ ТОЛЬКО ТЕХ, КОТОРЫЕ ЖИВУТ В ГОРОДЕ LOS ANGELES';
+  setCurrentUsers({ myFriends: filteredUsers });
+};
+
+return (
     <div id={'hw02'}>
       <UserList2 users={currentUsers} filterUsers={filterUsers} />
     </div>
-  );
+);
 };
+
+
+// let [currentUsers, setCurrentUsers] = useState<UsersObjectType>(users);
+//
+// const filterUsers = () => {
+
+//   const filteredUsers = users.myFriends.filter(el => el.address.city === 'Los Angeles')
+//   //'НУЖНО ПРОФИЛЬТРОВАТЬ ДРУЗЕЙ. ОСТАВЛЯЕМ ТОЛЬКО ТЕХ, КОТОРЫЕ ЖИВУТ В ГОРОДЕ LOS ANGELES';
+//   setCurrentUsers({ myFriends: filteredUsers });
+// };
+//
+// return (
+//     <div id={'hw02'}>
+//       <UserList2 users={currentUsers} filterUsers={filterUsers} />
+//     </div>
+// );
+// };
