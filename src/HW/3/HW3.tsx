@@ -30,10 +30,10 @@ export const HW3 = () => {
   };
 
 
-    const addTask = (newTaskTitle: string) => {
-        const newTask =  {newTaskTitle}
+    const addTask = (value:string) => {
+       const newTask =  value
 
-        const newState = [newTask, ...texts]
+        const newState:Array<string> =[...texts, newTask]
         setTexts(newState)
     }
 
@@ -49,9 +49,7 @@ export const HW3 = () => {
 
       <input id={'hw03-input'} type="text" value={currentText} onChange={handleChange} />
 
-      <button id={'hw03-button'} onClick={handleSave}> // НЕ ХВАТАТЕТ ФУНКЦИИ
-        Сохранить
-      </button>
+      <button id={'hw03-button'} onClick={handleSave}>Сохранить</button>
 
       <h1 style={{ marginTop: '50px' }}>СПИСОК ДЕЛ НА ДЕНЬ:</h1>
 
